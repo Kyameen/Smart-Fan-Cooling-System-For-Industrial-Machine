@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>Smart Fan Cooling System - Publish Report</title>
+<meta name="generator" content="MATLAB 24.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2025-05-11">
+<meta name="DC.source" content="publish_script.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<h1>Smart Fan Cooling System - Publish Report</h1>
+<!--introduction-->
+<p>This script runs the smart fan simulation and displays key outputs.</p>
+<!--/introduction-->
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#1">Parameters</a>
+</li>
+<li>
+<a href="#2">Initialize System</a>
+</li>
+<li>
+<a href="#3">Run Simulation</a>
+</li>
+<li>
+<a href="#4">Plot Temperature</a>
+</li>
+<li>
+<a href="#5">Plot Fan Speed</a>
+</li>
+<li>
+<a href="#6">3D Surface Plot</a>
+</li>
+<li>
+<a href="#7">Export to Excel</a>
+</li>
+<li>
+<a href="#8">Output Summary</a>
+</li>
+</ul>
+</div>
+<h2 id="1">Parameters</h2>
+<pre class="codeinput">params = struct();
+params.Ta = 25;         <span class="comment">% Ambient temperature (&deg;C)</span>
+params.L = 70;          <span class="comment">% Load (%)</span>
+params.Tmax = 90;       <span class="comment">% Maximum temperature threshold (&deg;C)</span>
+params.T0 = 40;         <span class="comment">% Initial machine temperature (&deg;C)</span>
+params.sim_time = 60;   <span class="comment">% Simulation duration in seconds</span>
+</pre>
+<h2 id="2">Initialize System</h2>
+<pre class="codeinput">state = initialize_system(params);
+</pre>
+<h2 id="3">Run Simulation</h2>
+<pre class="codeinput">state = simulate_smart_fan(state, params);
+</pre>
+<pre class="codeoutput">System shutdown at 20.0 sec due to high temp (91.77 &deg;C)
+Max temperature reached: 91.77 &deg;C
+Fan ran in MEDIUM mode for 7 seconds.
+Data written to temperature_log.xlsx
+</pre>
+<h2 id="4">Plot Temperature</h2>
+<pre class="codeinput">figure;
+plot(state.time, state.T, <span class="string">'b'</span>, <span class="string">'LineWidth'</span>, 2);
+xlabel(<span class="string">'Time (s)'</span>);
+ylabel(<span class="string">'Temperature (&deg;C)'</span>);
+title(<span class="string">'Temperature Over Time'</span>);
+grid <span class="string">on</span>;
+</pre>
+<img vspace="5" hspace="5" src="publish_script_01.png" alt=""> <h2 id="5">Plot Fan Speed</h2>
+<pre class="codeinput">figure;
+stairs(state.time, fan_speed_to_numeric(state.FanSpeed), <span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 2);
+yticks(0:3); yticklabels({<span class="string">'Off'</span>, <span class="string">'Low'</span>, <span class="string">'Medium'</span>, <span class="string">'High'</span>});
+xlabel(<span class="string">'Time (s)'</span>);
+ylabel(<span class="string">'Fan Speed'</span>);
+title(<span class="string">'Fan Speed Over Time'</span>);
+grid <span class="string">on</span>;
+</pre>
+<img vspace="5" hspace="5" src="publish_script_02.png" alt=""> <h2 id="6">3D Surface Plot</h2>
+<pre class="codeinput">figure;
+[X, Y] = meshgrid(state.time, 1:5);
+Z = repmat(state.T, 5, 1);
+surf(X, Y, Z);
+xlabel(<span class="string">'Time'</span>); ylabel(<span class="string">'Fan Layer'</span>); zlabel(<span class="string">'Temperature'</span>);
+title(<span class="string">'3D Surface of Temperature'</span>);
+grid <span class="string">on</span>;
+</pre>
+<img vspace="5" hspace="5" src="publish_script_03.png" alt=""> <h2 id="7">Export to Excel</h2>
+<pre class="codeinput">T_data = [state.time' state.T'];
+xlswrite(<span class="string">'temperature_log.xlsx'</span>, T_data);
+disp(<span class="string">'Data written to temperature_log.xlsx'</span>);
+</pre>
+<pre class="codeoutput">Data written to temperature_log.xlsx
+</pre>
+<h2 id="8">Output Summary</h2>
+<pre class="codeinput">disp([<span class="string">'Max Temp: '</span>, num2str(max(state.T)), <span class="string">' &deg;C'</span>]);
+disp([<span class="string">'Simulation Length: '</span>, num2str(length(state.time)), <span class="string">' steps'</span>]);
+disp([<span class="string">'Temperature Array Size: '</span>, mat2str(size(state.T))]);
+disp(<span class="string">'Simulation completed successfully.'</span>);
+</pre>
+<pre class="codeoutput">Max Temp: 91.7743 &deg;C
+Simulation Length: 61 steps
+Temperature Array Size: [1 61]
+Simulation completed successfully.
+</pre>
+<p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2024b</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+%% Smart Fan Cooling System - Publish Report
+% This script runs the smart fan simulation and displays key outputs.
+
+%% Parameters
+params = struct();
+params.Ta = 25;         % Ambient temperature (°C)
+params.L = 70;          % Load (%)
+params.Tmax = 90;       % Maximum temperature threshold (°C)
+params.T0 = 40;         % Initial machine temperature (°C)
+params.sim_time = 60;   % Simulation duration in seconds
+
+%% Initialize System
+state = initialize_system(params);
+
+%% Run Simulation
+state = simulate_smart_fan(state, params);
+
+%% Plot Temperature
+figure;
+plot(state.time, state.T, 'b', 'LineWidth', 2);
+xlabel('Time (s)');
+ylabel('Temperature (°C)');
+title('Temperature Over Time');
+grid on;
+
+%% Plot Fan Speed
+figure;
+stairs(state.time, fan_speed_to_numeric(state.FanSpeed), 'r', 'LineWidth', 2);
+yticks(0:3); yticklabels({'Off', 'Low', 'Medium', 'High'});
+xlabel('Time (s)');
+ylabel('Fan Speed');
+title('Fan Speed Over Time');
+grid on;
+
+%% 3D Surface Plot
+figure;
+[X, Y] = meshgrid(state.time, 1:5);
+Z = repmat(state.T, 5, 1);
+surf(X, Y, Z);
+xlabel('Time'); ylabel('Fan Layer'); zlabel('Temperature');
+title('3D Surface of Temperature');
+grid on;
+
+%% Export to Excel
+T_data = [state.time' state.T'];
+xlswrite('temperature_log.xlsx', T_data);
+disp('Data written to temperature_log.xlsx');
+
+%% Output Summary
+disp(['Max Temp: ', num2str(max(state.T)), ' °C']);
+disp(['Simulation Length: ', num2str(length(state.time)), ' steps']);
+disp(['Temperature Array Size: ', mat2str(size(state.T))]);
+disp('Simulation completed successfully.');
+
+##### SOURCE END #####
+-->
+</body>
+</html>
